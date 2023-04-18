@@ -64,6 +64,9 @@ function App() {
    const connectWallet = async () => {
     // @ts-ignore
     const { solana } = window;
+    {
+      console.log(solana)
+    }
 
     if (solana) {
       try {
@@ -82,13 +85,13 @@ function App() {
 
     if (provider) setProvider(provider);
     else setProvider(undefined);
-  }, []);
+  }, [walletKey]);
 
   return (
     <div className="App">
     <header className="App-header">
       <h2>Connect to Phantom Wallet</h2>
-      {provider && (
+      {(provider && !walletKey) && (
         <button
             style={{
               fontSize: "16px",
