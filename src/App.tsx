@@ -47,6 +47,7 @@ function App() {
   );
 
 
+
   /**
   * @description gets Phantom provider, if it exists
   */
@@ -67,7 +68,7 @@ function App() {
     {
       console.log(solana)
     }
-
+      
     if (solana) {
       try {
         const response = await solana.connect();
@@ -79,8 +80,15 @@ function App() {
     }
   };
 
+  const disconnectWallet = async() =>{
+    //  const {solana} = window
+    const res = await provider?.disconnect();
+    setWalletKey(undefined)
+  }
+
   // detect phantom provider exists
   useEffect(() => {
+    console.log(`useEffect`)
     const provider = getProvider();
 
     if (provider) setProvider(provider);
@@ -112,9 +120,23 @@ function App() {
           </p>
         )}
 
+
+{walletKey && <>
         <p>
          Welcome to the Solana Phantom Wallet Lesson!
           </p>
+          <button
+            style={{
+              fontSize: "16px",
+              padding: "15px",
+              fontWeight: "bold",
+              borderRadius: "5px",
+            }}
+            onClick={disconnectWallet}
+          >
+            Disconnect to Phantom Wallet
+          </button>
+          </>}
       </header>
     </div>
   );
